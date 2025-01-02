@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+//importamos los componentes 
+import { AuthProvider } from "./lib/auth";
+import ProtectedRoute from "./lib/ProtectedRoute";
+import { Bounce, ToastContainer } from "react-toastify";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,14 +26,19 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  //definir las rutas excluidas de a autenticacion(login,register)
+  const excludedRoutes = ['/login', '/register']
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       
-        {children}
-       
+        <ToastContainer theme="dark" transition={Bounce} />
+        <AuthProvider>
+          {/* Protege las rutas con ProtectedRoute */}
+          <ProtectedRoute excludedRoutes={excludedRoutes}>{children}</ProtectedRoute>
+        </AuthProvider>
       </body>
     </html>
   );

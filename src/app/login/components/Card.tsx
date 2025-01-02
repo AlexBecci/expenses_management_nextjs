@@ -9,8 +9,11 @@ import { API_BASE_URL } from "@/app/lib/constants"
 import { useRouter } from "next/navigation"
 //libreira de la cookie
 import Cookies from "js-cookie"
+import { toast } from "react-toastify"
+import { LoaderHover } from "@/app/components/Loader"
 
 export default function Card() {
+    //constante q activa el hover con el loader
     //constante que almacena la data a enviar 
     const [formData, setFormData] = useState({ email: '', password: '' })
     //constante que genera el loading dpara la solicitud a la api
@@ -40,9 +43,11 @@ export default function Card() {
             })
             const data = await res.json()
             if (!res.ok) {
+                toast.error(`${data.message}`);
                 throw new Error(data.message || 'Algo salio mal')
             }
-            console.log('RESPUESTA DEL SERVIDOR', data)
+            console.log('RESPUESTA DEL SERVIDOR', data.message)
+            toast.success(data.message)
             //aca se le redirige el token
             Cookies.set('authToken', data.token, { expires: 7, secure: true })
             //redirigir al usuario /example
@@ -57,6 +62,9 @@ export default function Card() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            {loading && (
+                <LoaderHover />
+            )}
             <div className="px-8 py-6 mt-4 text-left bg-background shadow-lg rounded-lg">
                 <h3 className="text-2xl font-bold text-center">Login to your account</h3>
                 <form onSubmit={handleSubmit}>
