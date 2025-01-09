@@ -1,0 +1,20 @@
+{
+    "categories": {
+        "title": "Gestión de Categorías",
+        "description": "Administra tus categorías de productos aquí",
+        "search_placeholder": "Buscar categorías...",
+        "add_category": "Agregar Categoría",
+        "list": {
+            "electronics": {
+                "name": "Electrónica",
+                "created_on": "Creado el {{date}}",
+                "description": "Dispositivos electrónicos y accesorios"
+            },
+            "books": {
+                "name": "Libros",
+                "created_on": "Creado el {{date}}",
+                "description": "Libros físicos y digitales"
+            }
+        }
+    }
+}

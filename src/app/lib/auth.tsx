@@ -1,7 +1,7 @@
 'use client'
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
-import { Loader } from "../components/Loader";
+import { Loader } from "../components/loaders/Loadings";
 
 interface AuthContextType {
     isAuthenticated: boolean;

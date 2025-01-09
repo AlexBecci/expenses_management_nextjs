@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation"
 //libreira de la cookie
 import Cookies from "js-cookie"
 import { toast } from "react-toastify"
-import { LoaderHover } from "@/app/components/Loader"
+import { LoaderHover } from "@/app/components/loaders/Loadings"
 
 export default function Card() {
     //constante q activa el hover con el loader

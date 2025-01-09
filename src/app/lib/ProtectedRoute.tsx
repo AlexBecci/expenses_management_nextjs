@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from "react";
 import { useAuth } from "./auth";
+import { LoaderHover } from "../components/loaders/Loadings";
 
 const ProtectedRoute = ({ children, excludedRoutes }: { children: React.ReactNode, excludedRoutes: string[] }) => {
     const { isAuthenticated } = useAuth();
@@ -22,9 +23,7 @@ const ProtectedRoute = ({ children, excludedRoutes }: { children: React.ReactNod
 
     // Mientras obtenemos la ruta actual, no renderizamos nada
     if (!currentPath) return (
-        <div>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit tenetur eum consequatur aliquid omnis culpa incidunt distinctio repudiandae aliquam amet, corrupti voluptatibus. Ipsum est neque alias maiores perspiciatis. Necessitatibus, quia.
-        </div>
+        <LoaderHover />
     );
 
     // Si no está autenticado y la ruta no está excluida, no renderizar nada

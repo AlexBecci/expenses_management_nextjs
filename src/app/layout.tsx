@@ -5,6 +5,8 @@ import "./globals.css";
 import { AuthProvider } from "./lib/auth";
 import ProtectedRoute from "./lib/ProtectedRoute";
 import { Bounce, ToastContainer } from "react-toastify";
+/* import i18n from "./lib/i18n";
+import { I18nextProvider } from "react-i18next"; */
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,11 +36,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/*    <I18nextProvider i18n={i18n}> */}
         <ToastContainer theme="dark" transition={Bounce} />
         <AuthProvider>
           {/* Protege las rutas con ProtectedRoute */}
           <ProtectedRoute excludedRoutes={excludedRoutes}>{children}</ProtectedRoute>
         </AuthProvider>
+        {/*  </I18nextProvider> */}
       </body>
     </html>
   );
