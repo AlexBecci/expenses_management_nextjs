@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`gothamMedium ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {/*    <I18nextProvider i18n={i18n}> */}
         <ToastContainer theme="dark" transition={Bounce} />

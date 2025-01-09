@@ -1,4 +1,4 @@
-import { Sidebar } from "../components/Sidebar";
+import { Sidebar } from "../components/sidebars/Sidebar";
 import { MetricCard } from "./components/MetricCard";
 import { OverviewChart } from "./components/OverviewChart";
 import { RecentTransactions } from "./components/RecentTransactions";

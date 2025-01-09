@@ -3,13 +3,13 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a ;
+  --foreground: #ededed;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #0f172a ;
     --foreground: #ededed;
   }
 }
@@ -18,4 +18,95 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ESTILOS PARA LOS TEXTOS */
+@font-face {
+  font-family: 'Gotham-Black';
+  src: url('/fonts/Gotham-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham-Book';
+  src: url('/fonts/Gotham-Book.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Gotham-Medium';
+  src: url('/fonts/Gotham-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* fuente itallic */
+@font-face {
+  font-family: 'Gotham-Italic';
+  src: url('/fonts/Gotham-Italic.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* FUENTE APUNTADA PARA EL FOOTER */
+@font-face {
+  font-family: 'BebasNeue-Regular';
+  src: url('/fonts/BebasNeue-Regular.ttf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bison-BoldItallic';
+  src: url('/fonts/Bison-BoldItallic.ttf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* FUENTE PARA SALTA */
+@font-face {
+  font-family: 'OpenSans-BoldItalic';
+  src: url('/fonts/OpenSans-BoldItalic.ttf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+/* Define utility classes */
+.gothamBlack {
+  font-family: 'Gotham-Black', sans-serif;
+}
+
+.gothamBook {
+  font-family: 'Gotham-Book', sans-serif;
+}
+
+.gothamMedium {
+  font-family: 'Gotham-Medium', sans-serif;
+}
+
+.gothamItalic {
+  font-family: 'Gotham-Italic', sans-serif;
+}
+
+.bisonBoldItallic {
+  font-family: 'Bison-BoldItallic', sans-serif;
+}
+
+/* fuente de footer  */
+.bebasNeueRegular {
+  font-family: 'BebasNeue-Regular', sans-serif;
+}
+
+/* FUENTE PARA SALTA */
+.OpenSansBoldItalic {
+  font-family: 'OpenSans-BoldItalic', sans-serif;
+}
+
+/* ESTILOS PARA LOS TEXTOS */
+.texto-inclinado {
+  display: inline-block;
+  transform: skewX(-8deg);
+  /* Inclina el texto en el eje X */
 }
