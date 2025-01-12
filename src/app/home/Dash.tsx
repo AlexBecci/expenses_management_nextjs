@@ -10,7 +10,6 @@ export default function HomePage() {
       <main className="flex-1 p-8 overflow-y-auto">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-2xl font-semibold text-gray-300 mb-6">Dashboard</h1>
-
           {/* Metric Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
             <MetricCard title="Total Balance" value="$45,231.89" />

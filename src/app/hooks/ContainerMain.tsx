@@ -1,6 +1,6 @@
 'use client'
 
-import { Sidebar, SidebarMobile } from "../components/sidebars/Sidebar"
+import { Sidebar, Navbar } from "../components/sidebars/Sidebar"
 import { useDeviceType } from "./useDeviceType"
 
 interface ContainerMainProps {
@@ -9,8 +9,15 @@ interface ContainerMainProps {
 export function ContainerMain({ children }: ContainerMainProps) {
     const { isDesktop, isMobile, isTablet } = useDeviceType()
     return (
-        <div className="flex-col h-screen ">
-            {isMobile ? <SidebarMobile /> : <Sidebar />}
+        <div className="sm:flex h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+            {/* Sidebar para desktop o Navbar para mobile */}
+            {isMobile ? (
+                <Navbar />
+            ) : (
+                <div className="w-64 flex-shrink-0">
+                    <Sidebar />
+                </div>
+            )}
             <main className="flex-1 p-4 overflow-y-auto">
                 <div className="max-w-7xl mx-auto">
                     {children}

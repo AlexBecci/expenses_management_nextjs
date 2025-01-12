@@ -4,7 +4,7 @@ import Link from "next/link"
 import { Input } from "./ui/input"
 import { Button } from "./ui/button"
 import { useState } from "react"
-import { API_BASE_URL } from "@/app/lib/constants"
+import { API_BASE_URL, backgroundCard } from "@/app/lib/constants"
 //importamos router con next
 import { useRouter } from "next/navigation"
 //libreira de la cookie
@@ -29,6 +29,12 @@ export default function Card() {
             [id]: value,
         }))
     }
+    //logout
+/*     async function logout1() {
+        Cookies.remove('authToken')
+        router.push('/login')
+    } */
+
 
     //funcion que envia la data
     async function handleSubmit(e: React.FormEvent) {
@@ -39,6 +45,7 @@ export default function Card() {
             const res = await fetch(`${API_BASE_URL}/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                credentials: 'include', // Esto permite que las cookies se envíen con la solicitud
                 body: JSON.stringify(formData)
             })
             const data = await res.json()
@@ -61,20 +68,21 @@ export default function Card() {
     }
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <div className="flex items-center justify-center min-h-screen bg-gradient-to-tr from-black/80 to-slate-800">
             {loading && (
                 <LoaderHover />
             )}
-            <div className="px-8 py-6 mt-4 text-left bg-background shadow-lg rounded-lg">
-                <h3 className="text-2xl font-bold text-center">Login to your account</h3>
+            <div className={`px-8 py-6 mt-4 text-left shadow-lg ${backgroundCard} shadow-white/10 border rounded-lg`}>
+              {/*   <button onClick={logout1}>LOGOUT</button> */}
+                <h3 className="text-xl  text-center">Inicie sesión en su cuenta</h3>
                 <form onSubmit={handleSubmit}>
                     <div className="mt-4">
                         <div>
-                            <label className="block" htmlFor="email">Email</label>
+                            <label className="block text-sm" htmlFor="email">Email</label>
                             <Input
                                 type="email"
-                                placeholder="Enter your email"
-                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                placeholder="Ingrese su  email"
+                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-600"
                                 id="email"
                                 value={formData.email}
                                 onChange={handleChange}
@@ -83,11 +91,11 @@ export default function Card() {
                             />
                         </div>
                         <div className="mt-4">
-                            <label className="block" htmlFor="password">Password</label>
+                            <label className="block text-sm" htmlFor="password">Password</label>
                             <Input
                                 type="password"
-                                placeholder="Enter your password"
-                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-blue-600"
+                                placeholder="Ingrese su password"
+                                className="w-full px-4 py-2 mt-2 border rounded-md focus:outline-none focus:ring-1 focus:ring-cyan-600"
                                 id="password"
                                 value={formData.password}
                                 onChange={handleChange}
@@ -96,8 +104,8 @@ export default function Card() {
                             />
                         </div>
                         <div className="flex items-baseline justify-between">
-                            <Button disabled={loading} type="submit" className="px-6 py-2 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-900">{loading ? 'Loading...' : 'Login'}</Button>
-                            <Link href="/forgotPassword" className="text-sm text-blue-600 hover:underline">Forgot password?</Link>
+                            <Button disabled={loading} type="submit" className="px-6 py-2 mt-4 text-white bg-cyan-600 rounded-lg hover:bg-cyan-900">{loading ? 'Cargando...' : 'Enviar'}</Button>
+                            {/* <Link href="/forgotPassword" className="text-sm text-blue-600 hover:underline">Forgot password?</Link> */}
                         </div>
                     </div>
                 </form>

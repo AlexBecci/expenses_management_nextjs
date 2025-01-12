@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     useEffect(() => {
         const token = Cookies.get("authToken");
-        console.log(token)
+      /*   console.log(token) */
         setIsAuthenticated(!!token);
     }, []);
     if (isAuthenticated === null) return <Loader />; // Mientras verifica autenticación
