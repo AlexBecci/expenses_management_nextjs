@@ -9,7 +9,7 @@ interface ContainerMainProps {
 export function ContainerMain({ children }: ContainerMainProps) {
     const { isDesktop, isMobile, isTablet } = useDeviceType()
     return (
-        <div className="sm:flex h-screen bg-gradient-to-b from-gray-900 to-gray-800">
+        <div className="sm:flex min-h-screen bg-gradient-to-b from-gray-900 to-gray-800">
             {/* Sidebar para desktop o Navbar para mobile */}
             {isMobile ? (
                 <Navbar />

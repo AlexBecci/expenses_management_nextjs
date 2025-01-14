@@ -4,7 +4,7 @@ import { useState } from "react";
 import { API_BASE_URL, backgroundCard } from "@/app/lib/constants";
 import { Input } from "../login/components/ui/input";
 import { Button } from "../login/components/ui/button";
-import { LoadingHover } from "../components/loaders/Loadings";
+import { LoadingFetch } from "../components/loaders/Loadings";
 
 export default function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -38,11 +38,11 @@ export default function RegisterForm() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     email: formData.email,
-                    password: formData.password, 
+                    password: formData.password,
                     name: formData.name,
                     phone_number: parseInt(formData.phone_number),
                 }),
-                credentials:'include' as RequestCredentials
+                credentials: 'include' as RequestCredentials
             });
 
             if (response.ok) {
@@ -63,9 +63,9 @@ export default function RegisterForm() {
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gradient-to-tr from-black/80 to-slate-800">
-            {loading && <LoadingHover />}
+            {loading && <LoadingFetch />}
             <div
-                className={`px-4 py-6 mt-4 text-left shadow-lg ${backgroundCard} shadow-white/10 border rounded-lg`}
+                className={`px-8 w-full max-w-sm py-6 mt-4 text-left shadow-lg ${backgroundCard} shadow-white/10 border rounded-lg`}
             >
                 <h3 className="text-xl text-center">Regístrese para crear una cuenta</h3>
                 <form onSubmit={handleSubmit}>

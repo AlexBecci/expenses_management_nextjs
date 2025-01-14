@@ -28,6 +28,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  
   //definir las rutas excluidas de a autenticacion(login,register)
   const excludedRoutes = ['/login', '/register']
 
@@ -36,13 +37,11 @@ export default function RootLayout({
       <body
         className={`gothamMedium ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {/*    <I18nextProvider i18n={i18n}> */}
         <ToastContainer theme="dark" transition={Bounce} />
+        {/* Protege las rutas con ProtectedRoute */}
         <AuthProvider>
-          {/* Protege las rutas con ProtectedRoute */}
           <ProtectedRoute excludedRoutes={excludedRoutes}>{children}</ProtectedRoute>
         </AuthProvider>
-        {/*  </I18nextProvider> */}
       </body>
     </html>
   );

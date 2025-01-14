@@ -19,7 +19,7 @@ export const Card = ({ description, amount, category_name, date }: CardProps) =>
                                 <div className="p-2 rounded-md bg-green-500/10 text-green-400 flex-shrink-0">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
-                                        className="w-5 h-5"
+                                        className="w-4 h-4"
                                         fill="none"
                                         stroke="currentColor"
                                         viewBox="0 0 24 24"
@@ -66,5 +66,33 @@ export const Card = ({ description, amount, category_name, date }: CardProps) =>
                 </div>
             </div>
         </div>
+    )
+}
+
+
+interface CardHomeProps {
+    title: string
+    value: string
+    color?: string
+    subColor: string
+    colorIcon: string
+    Icon: React.ElementType; // Tipo para un componente React
+}
+export const CardHome = ({ title, color, subColor, colorIcon, Icon, value }: CardHomeProps) => {
+    return (
+        < div className="bg-gray-800/50 hover:bg-gray-700 transition-colors border rounded-lg border-gray-200/20" >
+            <div className="p-6">
+                <div className="flex items-center justify-between">
+                    <div>
+                        <p className="text-sm  text-gray-400">{title}</p>
+                        <h3 className={`text-lg ${color} `}>${value}</h3>
+                        <p className={`text-xs ${subColor}  mt-1`}>+2.5% vs. mes anterior</p>
+                    </div>
+                    <div className="p-3 bg-blue-500/10 rounded-full">
+                        <Icon className={`w-6 h-6 ${colorIcon}`} />
+                    </div>
+                </div>
+            </div>
+        </div >
     )
 }
