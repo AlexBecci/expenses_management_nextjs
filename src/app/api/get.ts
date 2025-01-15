@@ -68,7 +68,14 @@ export async function fetchTransactions(user_id: number): Promise<Transaction[]>
         return []
     }
 }
-
+//function que me trae los datos del usuario mediante user_id
+/* export function fetchUser(user_id: number):Promise<User> {
+    if (!user_id || typeof user_id !== 'number') {
+        console.error("Invalid user_id provided");
+        return [];
+    }
+}
+ */
 
 //function que me trae el user_id
 export function getUserIdByCookie(): number {

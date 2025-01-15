@@ -7,7 +7,7 @@ import { HiBars3 } from 'react-icons/hi2';
 import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { useRouter } from "next/navigation"
 import Cookies from 'js-cookie'
-import { ButtonComponent } from '../buttons/Button';
+import { ButtonComponent, styleButton } from '../buttons/Button';
 import { LoadingFetch } from '../loaders/Loadings';
 import { toast } from 'react-toastify';
 const menuItems = [
@@ -121,7 +121,12 @@ export function Navbar() {
                     <div className="p-4 border-b border-slate-600 flex items-center justify-between">
                         <h1 className="text-lg font-bold text-gray-100">Menu</h1>
                         <div className='w-1/2 ml-auto'>
-                            <ButtonComponent text='Cerrar Sesión' className='' click={handleLogout} icon={<RiLogoutCircleRLine />} />
+                            <button
+                                onClick={() => setIsOpen(false)}
+                                className={`${styleButton} `}
+                            >
+                                Cerrar Menu
+                            </button>
                         </div>
                     </div>
                     <nav className="flex flex-col bg-slate-900/50 space-y-2 px-4 py-2">
@@ -140,12 +145,7 @@ export function Navbar() {
                         ))}
                     </nav>
                     <div className="p-4 border-t border-slate-600">
-                        <button
-                            onClick={() => setIsOpen(false)}
-                            className={`w-full text-sm font-medium ${backgroundColorButton}  border border-gray-600/60 text-white py-2 rounded-md hover:bg-blue-600`}
-                        >
-                            Cerrar Menu
-                        </button>
+                        <ButtonComponent text='Cerrar Sesión' className='' click={handleLogout} icon={<RiLogoutCircleRLine />} />
                     </div>
                 </div>
             )}
