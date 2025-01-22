@@ -12,7 +12,12 @@ import { List } from "./components/List";
 export default function HomePage() {
   //constante de modal
   const [modal, setModal] = useState<boolean>(false)
-
+  //booleano que activa el fetch de el component List
+  const [boolean, setBoolean] = useState<boolean>(false)
+  function success() {
+    setModal(false)
+    setBoolean(!boolean)
+  }
   return (
     <ContainerMain>
       <Title title='Inicio' />
@@ -40,11 +45,11 @@ export default function HomePage() {
           />
         </div>
         {/* LIST TRANSACCIONS BY USER */}
-        <List />
+        <List fetching={boolean} />
       </div>
       {/* COMPONENTES DE MODAL */}
       {modal && (
-        <Modal confirm={() => setModal(false)} onClose={() => setModal(false)} />
+        <Modal confirm={success} onClose={() => setModal(false)} />
       )}
     </ContainerMain>
   );

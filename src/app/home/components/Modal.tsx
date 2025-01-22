@@ -1,28 +1,79 @@
+import { getTokenInSession, getUserIdByCookie } from "@/app/api/get";
 import { ButtonComponent } from "@/app/components/buttons/Button";
+import { Loader, LoaderHover, LoadingFetch } from "@/app/components/loaders/Loadings";
+import { API_BASE_URL } from "@/app/lib/constants";
+import { getCurrentDate, getCurrentMonthYear } from "@/app/lib/utils";
 import { ModalProps } from "@/app/types/types";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { IoClose } from "react-icons/io5";
+import { toast } from "react-toastify";
 
 
 // Tipos para los datos del formulario
-interface FormValues {
+interface TransactionDTO {
     amount: number;
     type: string;
-    category: string;
     description: string;
+    period: string
+    category_id: number
+    user_id: number
+    date: string
 }
 export function Modal({ confirm, onClose }: ModalProps) {
     //constantes importadas desde la libreria de react-hook-form
-    const { register, handleSubmit, formState: { errors } } = useForm<FormValues>()
-
+    const { register, handleSubmit, formState: { errors } } = useForm<TransactionDTO>()
+    //loading para mostrar hover para el fetch
+    const [loading, setLoading] = useState<boolean>(false)
     // Enviar datos del formulario
-    const onSubmit: SubmitHandler<FormValues> = (data) => {
-        console.log("Datos enviados:", data);
-        /* confirm(); */
+    const onSubmit: SubmitHandler<TransactionDTO> = async (body) => {
+        //obtenemos el token
+        const token = getTokenInSession();
+        const user_id = getUserIdByCookie()
+        console.log("Datos enviados:", body);
+        const period = getCurrentMonthYear();
+        const date = getCurrentDate();
+        console.log(period)
+        const bodyParse: TransactionDTO = {
+            amount: body.amount,
+            category_id: body.category_id,
+            date,
+            description: body.description,
+            period,
+            type: body.type,
+            user_id
+        }
+        setLoading(true)
+        try {
+            const response = await fetch(`${API_BASE_URL}/transactions`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                },
+                credentials: 'include' as RequestCredentials, // Esto permite que las cookies se envíen con la solicitud
+                body: JSON.stringify(bodyParse)
+            })
+            const data = await response.json();
+            if (!response.ok) {
+                toast.error(`${data.message}`);
+                throw new Error(data.message || 'Algo salio mal')
+            }
+            toast.success(data.message)
+            confirm()
+        } catch (error) {
+            console.error(error)
+        }
+        finally {
+            setLoading(false)
+        }
     };
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4">
+            {loading && (
+                <LoadingFetch />
+            )}
             <form onSubmit={handleSubmit(onSubmit)} className="bg-gray-900 border border-white/59 rounded-lg w-full max-w-md p-6">
                 {/* Título y Descripción */}
                 <div className="mb-6">
@@ -79,17 +130,17 @@ export function Modal({ confirm, onClose }: ModalProps) {
                         </label>
                         <select
                             id="category"
-                            {...register("category", { required: "La categoría es obligatoria" })}
+                            {...register("category_id", { required: "La categoría es obligatoria" })}
                             className="w-full p-2 mt-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-500 text-sm"
                         >
                             <option value="">Seleccionar categoría</option>
-                            <option value="salary">Salario</option>
-                            <option value="food">Alimentación</option>
-                            <option value="transport">Transporte</option>
-                            <option value="utilities">Servicios</option>
+                            <option value={1}>Salario</option>
+                            <option value={2}>Alimentación</option>
+                            <option value={3}>Transporte</option>
+                            <option value={4}>Servicios</option>
                         </select>
-                        {errors.category && (
-                            <span className="text-red-500 text-xs">{errors.category.message}</span>
+                        {errors.category_id && (
+                            <span className="text-red-500 text-xs">{errors.category_id.message}</span>
                         )}
                     </div>
                     {/* Descripción */}
@@ -100,6 +151,7 @@ export function Modal({ confirm, onClose }: ModalProps) {
                         <input
                             id="description"
                             type="text"
+                            autoComplete="off"
                             placeholder="Descripción de la transacción"
                             {...register("description", { required: "La descripción es obligatoria" })}
                             className="w-full p-2 mt-2 bg-gray-800 border border-gray-700 text-gray-100 rounded-md focus:ring-2 focus:ring-blue-500 text-sm"

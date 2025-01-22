@@ -4,9 +4,11 @@ import { Transaction } from "@/app/types/types";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
+interface ListProp {
+    fetching: boolean
+}
+export function List({ fetching }: ListProp) {
 
-export function List() {
-    
     const [transactions, setTransactions] = useState<Transaction[]>([])
 
     const user_id = getUserIdByCookie()
@@ -26,12 +28,12 @@ export function List() {
         } else {
             toast.error('No hay Token asociado')
         }
-    }, [user_id])
+    }, [user_id, fetching])
 
     return (
         <div className="mt-6 rounded-lg ">
             <Title title="Últimas Transacciones" />
-            <div className="space-y-3 mt-4">
+            <div className="space-y-3 mt-4 h-[400px] overflow-y-auto">
                 {transactions.map((transaction) => {
                     const date = new Date(transaction.date).toLocaleDateString('es-ES', {
                         year: 'numeric',
